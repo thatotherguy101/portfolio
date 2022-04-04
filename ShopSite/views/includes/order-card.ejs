@@ -1,0 +1,15 @@
+<li class="order-card-body">
+    <div class="card-header">
+        <h3 class="order-date"><%= order.formattedDate %> </h3> 
+        <h3> - $<%= order.totalPrice.toFixed(2)  %></h3>
+        <% if(locals.isAdmin) {%>
+            <h3>- <%= order.userID %></h3>
+        <% } %>
+    </div>
+    <ul class="order-products">
+        <% for(let product of order.products ) { %>
+            <li><span class="product-name"> <%= product.name %> </span> - $<%= product.price * product.count %> ($<%= product.price %> * <%= product.count %>) </li>
+        <% } %>
+    </ul>
+    </div>
+</li>

@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs', {title: 'All Products'}) %> 
+<link rel="stylesheet" href="/styles/products.css">
+<script src="/scripts/delete-product.js" defer></script>
+</head>
+<body>
+    <%- include('../includes/header.ejs') %>
+    <main>
+        <h1>Products</h1>
+        <% if (products.length === 0 || !products) { %>
+         <p>Sorry, there's nothing for sale currently.</p>
+        <% } else { %>
+            <ul id="product-grid">
+                <% for( const product of products ) { %>
+                    <li class="product-card">
+                        <%- include('../includes/product-card', {product: product}) %> 
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+    </main>
+</body>
+<footer>
+    <p></p>
+</footer>
+</html>

@@ -1,0 +1,17 @@
+<img src="/<%= product.imagePath %>" alt="A picture of a(n) <%= product.name%>" class="card-image">
+<div class="card-body">
+    <h2><%= product.name %></h2>
+    <p><%= product.summary %></p>
+    <div class="btn-bar"> 
+        <% if (locals.isAdmin) { %>
+            <a href="/admin/edit-product/<%= product._id %>" class="link-btn">View & Edit</a>
+            <button class="btn" data-productid="<%= product._id %>" data-csrf="<%= locals.csrfToken %>">Delete</button>
+        <% } else { %>
+            <a href="/products/<%= product._id %>" class="link-btn">See details</a>
+            <form action="/cart/<%= product._id %>" method="POST">
+                <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf">
+                <button class="btn">Add to Cart</button>
+            </form>
+        <% } %>
+    </div>
+</div>

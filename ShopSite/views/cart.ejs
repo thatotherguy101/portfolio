@@ -1,0 +1,58 @@
+<%- include('includes/head.ejs', {title: 'Cart'}) %> 
+<link rel="stylesheet" href="/styles/cart.css">
+</head>
+<body>
+    <%- include('includes/header.ejs') %>
+    <main>
+        <h1>Your Cart</h1>
+        <% if (cart.length === 0 || !cart) { %>
+         <p>You have no items in your cart</p>
+        <% } else { %>
+            <ul id="cart-grid">
+                <li></li>
+                <li class="cart-grid-item">
+                    <p>Product Name</p>
+                </li>
+                <li class="cart-grid-item">
+                    <p>Quantity of Product</p>
+                </li>
+                <li class="cart-grid-item">
+                    <p>Price per Product</p>
+                </li>
+                <% for( const item of cart ) { %>
+                    <li class="cart-grid-item">
+                        <img src="/<%= item.imagePath %>" alt="A picture of a(n) <%= item.name%>" class="cart-img">
+                    </li>
+                    <li class="cart-grid-item">
+                        <p><%= item.name%></p>
+                    </li class="cart-grid-item">
+                    <li class="cart-grid-item">
+                        <p><%= item.count%></p>
+                    </li>
+                    <li class="cart-grid-item">
+                        <p>$<%= item.price%></p>
+                    </li>
+                <% } %>
+                <li></li>
+                <li></li>
+                <li class="totals">
+                    <p>Total Price:</p>
+                </li>
+                <li class="totals">
+                    <p>$<%= totalPrice %></p>
+                </li>
+            </ul>
+            <div class="btn-bar">
+                <form action="/empty-cart" method="POST">
+                    <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf">
+                    <button class="btn-alt">Empty Cart</button>
+                </form>
+                <form action="/order/<%= userId %>" method="POST">
+                    <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf">
+                    <button class="btn">Check Out</button>
+                </form>
+            </div>
+        <% } %>
+    </main>
+</body>
+</html>

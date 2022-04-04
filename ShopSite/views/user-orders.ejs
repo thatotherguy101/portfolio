@@ -1,0 +1,19 @@
+<%- include('includes/head.ejs', {title: 'My Orders'}) %> 
+<link rel="stylesheet" href="/styles/orders.css">
+</head>
+<body>
+    <%- include('includes/header.ejs') %>
+    <main>
+        <h1>Your Orders</h1>
+        <% if (!orders || orders.length === 0) { %>
+            <h2>You have not placed any orders.</h2>    
+        <% } else {%>
+        <ul class="order-list">
+            <% for( let order of orders ) { %>
+                <%- include('includes/order-card.ejs', {order: order}) %>
+            <% } %>
+        </ul>
+    <% } %>
+    </main>
+</body>
+</html>

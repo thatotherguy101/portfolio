@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs', {title: 'Edit Product'}) %>
+<link rel="stylesheet" href="/styles/products.css">
+<link rel="stylesheet" href="/styles/forms.css">
+<script src="/scripts/image-preview.js" defer></script>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+    <main>
+        <form action="/admin/edit-product/<%= inputData._id %>?_csrf=<%= locals.csrfToken %>" method="POST" class="input-form" id="add-product-form" enctype="multipart/form-data">
+            <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf">
+            <% if (inputData.hasError) { %>
+                <p class="error-message"><%= inputData.errMessage %></p>
+            <% } %>
+            <div class="form-input">
+                <label for="name">Product Name</label>
+                <input type="text" name="name" id="name" value="<%= inputData.name %>" required>
+            </div>
+            <div class="form-input">
+                <label for="price">Price</label> 
+                <input type="number" name="price" id="price" min="0" step="any" value="<%= inputData.price %>" required>
+            </div>
+            <div class="form-input">
+                <label for="summary">Product Summary</label>
+                <input type="text" name="summary" id="summary" value="<%= inputData.summary %>" required>
+            </div>
+            <div class="form-input">
+                <label for="description">Product Description</label>
+                <textarea name="description" id="description" cols="30" rows="10" required><%= inputData.description %></textarea>
+            </div>
+            <div class="form-input">
+                <img src="" alt="Product Image." id="image-preview">
+                <label for="image">Product Image</label>
+                <input type="file" name="image" id="image" accept=".jpg, .png, .jpeg" class="image-picker">
+            </div>
+
+            <%- include('../includes/btn-bar.ejs', {submitBtnTxt: 'Update Product', returnRoute: 'admin/edit-product/'+inputData._id}) %>
+        </form>
+    </main>
+</body>
+
+</html>

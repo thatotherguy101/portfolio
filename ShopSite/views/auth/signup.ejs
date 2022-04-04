@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs', {title: 'Sign Up'}) %> 
+<link rel="stylesheet" href="/styles/forms.css">
+</head>
+<body>
+    <%- include('../includes/header.ejs') %>
+    <main>
+        <h1>Create a New Account</h1>
+        <form id="sign-up-form" class="input-form" action="/signup" method="POST">
+            <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf">
+            <% if (inputData.hasError) { %>
+                <p class="error-message"><%= inputData.errMessage %></p>
+            <% } %>
+            
+            <div class="form-input">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<%= inputData.email %>" required>
+            </div>
+            <div class="form-input">
+                <label for="confirm-email">Confirm Email</label>
+                <input type="email" name="confirm-email" id="confirm-email" value="<%= inputData.confirmEmail %>" required>
+            </div>
+            <div class="form-input">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="<%= inputData.password %>" required>
+            </div>
+            <div class="form-input">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<%= inputData.name %>" required>
+            </div>
+            <div class="form-input">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" value="<%= inputData.address %>" required>
+            </div>
+            <%- include('../includes/btn-bar.ejs', {submitBtnTxt: 'Sign Up', returnRoute: 'signup'}) %> 
+        </form>
+        <p><a href="/login">Log In</a> instead</p>
+    </main>
+</body>
+</html>
